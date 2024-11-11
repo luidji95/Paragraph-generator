@@ -1,0 +1,87 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+.generate-div {
+  display: flex;
+  gap: 20px;
+}
+.input {
+  width: 80px;
+  padding: 10px 15px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  font-size: 16px;
+}
+.input:focus {
+  border-color: #2ecc71; /* Svetlozelena boja */
+  box-shadow: 0 0 8px rgba(46, 204, 113, 0.6);
+}
+.input::placeholder {
+  color: #bdc3c7; /* Svetlo siva boja */
+  font-style: italic;
+}
+/* .parag {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #34495e;
+  margin-bottom: 20px;
+  text-align: justify;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background: #ecf0f1;
+  border-left: 4px solid #3498db;
+  border-radius: 3px;
+} */
+.h3 {
+  font-size: 36px;
+  font-weight: bold;
+  color: #2c3e50; /* Tamno plava */
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 20px 0;
+  position: relative;
+}
