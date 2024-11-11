@@ -5,12 +5,12 @@ import "./App.css";
 
 function App() {
   const [number, setNumber] = useState(1);
+  const [data, setData] = useEffect([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("https://example.org/post", {
-          mode: "no-cors",
           headers: {
             "Content-Type": "application/json",
           },
@@ -22,7 +22,7 @@ function App() {
 
         const data = await response.json();
         console.log("Fetched data:", data);
-        // Ovde možeš postaviti data u state ako je potrebno: setState(data);
+        setData(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
