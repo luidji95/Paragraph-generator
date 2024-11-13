@@ -5,24 +5,27 @@ import "./App.css";
 
 function App() {
   const [number, setNumber] = useState(1);
-  const [data, setData] = useEffect([]);
+  const [data, setData] = useState([]);
+  // izbristi joke
+  // dugme add joke za dodavanje
+  // ako sam dodao joke i  napravim refetch neka izadje modal da pita da li zelimo da zadrzimo svoju novu salu ako se klikne
+  // na yes fetchuju se tih 10 i dodaje se nova ako ne dodju novih 10
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://example.org/post", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        const response = await fetch(
+          "https://icanhazdadjoke.com/search?limit=5",
+          {
+            headers: {
+              Accept: "application/json",
+            },
+          }
+        );
 
         const data = await response.json();
-        console.log("Fetched data:", data);
         setData(data);
+        console.log("Fetched data:", data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -32,7 +35,11 @@ function App() {
   }, []);
 
   const renderParagraphs = (value) => {
-    console.log(value);
+    const jokes = data.results.map((item) => item.jokes);
+
+    const paragraphToRender = jokes.slice(0, value);
+
+    return paragraphToRender.map((paragraph) => <p>{paragraph}</p>);
   };
 
   return (
