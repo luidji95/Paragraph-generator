@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
   const [number, setNumber] = useState(1);
   const [data, setData] = useState([]);
-  // izbristi joke
-  // dugme add joke za dodavanje
-  // ako sam dodao joke i  napravim refetch neka izadje modal da pita da li zelimo da zadrzimo svoju novu salu ako se klikne
-  // na yes fetchuju se tih 10 i dodaje se nova ako ne dodju novih 10
+  const [paragraphs, setParagraphs] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,18 +30,41 @@ function App() {
   }, []);
 
   const renderParagraphs = (value) => {
-    const jokes = data.results.map((item) => item.jokes);
+    // Pravimo niz objekata koji sadrži `id` i `joke`
+    const jokes = data.results.map((item) => ({
+      id: item.id,
+      joke: item.joke,
+    }));
+    const paragraphsToRender = jokes.slice(0, value);
 
-    const paragraphToRender = jokes.slice(0, value);
-
-    return paragraphToRender.map((paragraph) => <p>{paragraph}</p>);
+    setParagraphs(
+      paragraphsToRender.map(({ id, joke }) => (
+        <div className="parag" key={id}>
+          {joke}
+          <button className="bad-joke" onClick={() => deleteJoke(id)}>
+            Bad joke?
+          </button>
+        </div>
+      ))
+    );
   };
+
+  const deleteJoke = (idToDelete) => {
+    setParagraphs((prevParagraphs) =>
+      prevParagraphs.filter((paragraph) => paragraph.key !== idToDelete)
+    );
+  };
+
+  const addingNewJoke = () => {};
 
   return (
     <>
       <h3 className="h3">TIRED OF BORING LOREM IPSUM?</h3>
+      <button className="add-joke" onClick={() => addingNewJoke()}>
+        Add new joke
+      </button>
       <div className="generate-div">
-        <p className="parag">Paragraphs:</p>
+        <p className="paragraph">Paragraphs:</p>
         <input
           type="number"
           className="input"
@@ -61,6 +79,7 @@ function App() {
           Generate
         </button>
       </div>
+      <div>{paragraphs}</div>
     </>
   );
 }
